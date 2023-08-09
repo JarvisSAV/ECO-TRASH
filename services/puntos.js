@@ -5,7 +5,7 @@ export const getPuntos = () => {
     return new Promise((resolve, reject) => {
         conn.query(sql, (error, results) => {
             if (error) {
-                reject('Error al obtener los puntos')
+                reject(error)
             } else {
                 resolve(results)
             }
@@ -13,13 +13,27 @@ export const getPuntos = () => {
     })
 }
 
-export const postPuntos = ({ fecha, puntos, estado }) => {
-    const sql = 'INSERT INTO puntos values (null, ?, ?, ?)'
-    const datos = [fecha, puntos, estado]
+export const getPuntosUser = (id) => {
+    const sql = 'SELECT * FROM puntos where id_usuario = ?'
+    const datos = [id]
     return new Promise((resolve, reject) => {
         conn.query(sql, datos, (error, results) => {
             if (error) {
-                reject('Error al insertar los puntos')
+                reject(error)
+            } else {
+                resolve(results)
+            }
+        })
+    })
+}
+
+export const postPuntos = ({ fecha, puntos, estado, id_tarjeta }) => {
+    const sql = 'INSERT INTO puntos values (null, ?, ?, ?, ?)'
+    const datos = [fecha, puntos, estado, id_tarjeta]
+    return new Promise((resolve, reject) => {
+        conn.query(sql, datos, (error, results) => {
+            if (error) {
+                reject(error)
             } else {
                 resolve(results.affectedRows)
             }
@@ -31,6 +45,6 @@ export const postPuntos = ({ fecha, puntos, estado }) => {
 
 // console.log(getPuntos())
 
-getPuntos()
-    .then(results => console.log(results))
-    .catch(error => console.log(error))
+// getPuntos()
+//     .then(results => console.log(results))
+//     .catch(error => console.log(error))

@@ -1,0 +1,9 @@
+POST http://192.168.1.69:4000/api/bote/1
+Content-Type: application/json
+
+{
+    "tipo": "plasticos",
+    "ubicacion": "Escuela",
+    "estado_actual": 20,
+    "capacidad": 10
+}

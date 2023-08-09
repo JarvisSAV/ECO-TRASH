@@ -1,0 +1,7 @@
+POST http://localhost:4000/api/puntos
+Content-Type: application/json
+
+{
+    "puntos": 50,
+    "id_tarjeta": 1
+}
